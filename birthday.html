@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday! 🎂✨</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="birthday-page">
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Custom Sparkle Canvas Overlay -->
+    <canvas id="sparkle-canvas"></canvas>
+
+    <!-- Glowing magical door opening on page load -->
+    <div class="transition-overlay active-out" id="transition-overlay">
+        <div class="door left-door"></div>
+        <div class="door right-door"></div>
+        <div class="portal-core"></div>
+    </div>
+
+    <!-- Background Music Toggle Float -->
+    <button class="music-toggle-btn" id="music-toggle">
+        <span class="music-icon">🔇</span>
+        <span class="music-label">Enable Magic Music</span>
+    </button>
+
+    <div class="container scrollable">
+        <!-- Page 3 Main Area -->
+        <section id="birthday-main-section" class="animated-fade-in">
+            <header class="birthday-header text-center">
+                <h1 class="glow-title large-title">Happy Birthday! 🎉</h1>
+                <p class="sparkle-subtitle">Tap the candles to blow them out & make a wish!</p>
+            </header>
+
+            <!-- Birthday Cake & Interactive Character Platform -->
+            <div class="cake-platform">
+                <!-- Boy Monkey (Dances/Interacts) -->
+                <div class="monkey-wrapper birthday-monkey-wrapper" id="birthday-boy-monkey">
+                    <svg class="monkey-svg idle" viewBox="0 0 100 100">
+                        <defs>
+                            <radialGradient id="monkey-belly" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFE4C4"/>
+                                <stop offset="100%" stop-color="#D2B48C"/>
+                            </radialGradient>
+                        </defs>
+                        <rect x="35" y="60" width="30" height="30" rx="15" fill="#8B5A2B" />
+                        <rect x="40" y="65" width="20" height="20" rx="10" fill="url(#monkey-belly)" />
+                        <g class="left-arm">
+                            <rect x="23" y="55" width="12" height="22" rx="6" fill="#8B5A2B" />
+                            <circle cx="29" cy="71" r="5" fill="#FFE4C4" />
+                        </g>
+                        <g class="right-arm">
+                            <rect x="65" y="58" width="12" height="20" rx="6" fill="#8B5A2B" />
+                            <circle cx="71" cy="73" r="5" fill="#FFE4C4" />
+                        </g>
+                        <circle cx="50" cy="40" r="22" fill="#8B5A2B" />
+                        <circle cx="28" cy="35" r="8" fill="#8B5A2B" />
+                        <circle cx="28" cy="35" r="5" fill="#FFE4C4" />
+                        <circle cx="72" cy="35" r="8" fill="#8B5A2B" />
+                        <circle cx="72" cy="35" r="5" fill="#FFE4C4" />
+                        <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFE4C4" />
+                        <g class="eyes">
+                            <circle class="eye left-eye" cx="44" cy="35" r="3" fill="#2d3748" />
+                            <circle class="eye right-eye" cx="56" cy="35" r="3" fill="#2d3748" />
+                        </g>
+                        <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                    </svg>
+                    <div class="speech-bubble birthday-speech inline-speech">
+                        <p id="boy-speech">Make a wish! 🎂</p>
+                    </div>
+                </div>
+
+                <!-- 3D Styled Luxury Birthday Cake -->
+                <div class="cake-container" id="birthday-cake">
+                    <div class="cake-glow"></div>
+                    <!-- Plate -->
+                    <div class="cake-plate"></div>
+                    <!-- Base Tier -->
+                    <div class="cake-tier tier-bottom">
+                        <div class="frosting"></div>
+                        <div class="cream-decorations">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <!-- Top Tier -->
+                    <div class="cake-tier tier-top">
+                        <div class="frosting"></div>
+                        <div class="cream-decorations">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <!-- Interactive Candles -->
+                    <div class="candles-wrapper">
+                        <div class="candle active" id="candle-1">
+                            <div class="wick"></div>
+                            <div class="flame"></div>
+                            <div class="smoke"></div>
+                        </div>
+                        <div class="candle active" id="candle-2">
+                            <div class="wick"></div>
+                            <div class="flame"></div>
+                            <div class="smoke"></div>
+                        </div>
+                        <div class="candle active" id="candle-3">
+                            <div class="wick"></div>
+                            <div class="flame"></div>
+                            <div class="smoke"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Girl Monkey (Beside Cake) -->
+                <div class="monkey-wrapper birthday-monkey-wrapper" id="birthday-girl-monkey">
+                    <svg class="monkey-svg idle girl-monkey" viewBox="0 0 100 100">
+                        <defs>
+                            <radialGradient id="girl-monkey-belly" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFF0F5"/>
+                                <stop offset="100%" stop-color="#FFB6C1"/>
+                            </radialGradient>
+                        </defs>
+                        <!-- Body -->
+                        <rect x="35" y="60" width="30" height="30" rx="15" fill="#C71585" />
+                        <rect x="40" y="65" width="20" height="20" rx="10" fill="url(#girl-monkey-belly)" />
+                        <!-- Arm Left -->
+                        <g class="left-arm">
+                            <rect x="23" y="55" width="12" height="22" rx="6" fill="#C71585" />
+                            <circle cx="29" cy="71" r="5" fill="#FFF0F5" />
+                        </g>
+                        <!-- Arm Right -->
+                        <g class="right-arm">
+                            <rect x="65" y="58" width="12" height="20" rx="6" fill="#C71585" />
+                            <circle cx="71" cy="73" r="5" fill="#FFF0F5" />
+                        </g>
+                        <!-- Head -->
+                        <circle cx="50" cy="40" r="22" fill="#C71585" />
+                        <!-- Bow Tie on ear -->
+                        <path d="M 28,25 L 35,30 L 35,20 Z" fill="#FF1493" />
+                        <path d="M 28,25 L 21,30 L 21,20 Z" fill="#FF1493" />
+                        <circle cx="28" cy="25" r="3" fill="#FFF0F5" />
+                        <!-- Ears -->
+                        <circle cx="28" cy="35" r="8" fill="#C71585" />
+                        <circle cx="28" cy="35" r="5" fill="#FFF0F5" />
+                        <circle cx="72" cy="35" r="8" fill="#C71585" />
+                        <circle cx="72" cy="35" r="5" fill="#FFF0F5" />
+                        <!-- Face Inner -->
+                        <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFF0F5" />
+                        <!-- Eyes -->
+                        <g class="eyes">
+                            <circle class="eye left-eye" cx="44" cy="35" r="3" fill="#2d3748" />
+                            <circle class="eye right-eye" cx="56" cy="35" r="3" fill="#2d3748" />
+                            <!-- Cute Lashes -->
+                            <line x1="41" y1="32" x2="43" y2="34" stroke="#2d3748" stroke-width="1.5" />
+                            <line x1="59" y1="32" x2="57" y2="34" stroke="#2d3748" stroke-width="1.5" />
+                        </g>
+                        <!-- Mouth -->
+                        <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                    </svg>
+                    <div class="speech-bubble birthday-speech inline-speech">
+                        <p id="girl-speech">Yay! Hehe ❤️</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beautiful Gift Section Header -->
+            <div class="gifts-intro-wrapper hidden" id="gifts-intro">
+                <div class="scroll-arrow">▼</div>
+                <h2 class="sub-glow-text">Your Magical Gifts Are Waiting...</h2>
+                <p class="subtitle">Open each luxury gift box below to reveal your surprises!</p>
+            </div>
+
+            <!-- Premium Grid of Gift Boxes -->
+            <div class="gifts-grid hidden" id="gifts-grid">
+                <!-- Gift 1 Box -->
+                <div class="gift-box-wrapper" id="gift-card-1">
+                    <div class="luxury-gift-box" data-gift="1">
+                        <div class="box-lid"></div>
+                        <div class="box-body">
+                            <div class="box-ribbon-v"></div>
+                            <div class="box-ribbon-h"></div>
+                            <span class="gift-icon">🖼️</span>
+                        </div>
+                    </div>
+                    <span class="gift-label">Gift 1: Photo Gallery</span>
+                </div>
+
+                <!-- Gift 2 Box -->
+                <div class="gift-box-wrapper" id="gift-card-2">
+                    <div class="luxury-gift-box" data-gift="2">
+                        <div class="box-lid"></div>
+                        <div class="box-body">
+                            <div class="box-ribbon-v"></div>
+                            <div class="box-ribbon-h"></div>
+                            <span class="gift-icon">🎥</span>
+                        </div>
+                    </div>
+                    <span class="gift-label">Gift 2: Video Memories</span>
+                </div>
+
+                <!-- Gift 3 Box -->
+                <div class="gift-box-wrapper" id="gift-card-3">
+                    <div class="luxury-gift-box" data-gift="3">
+                        <div class="box-lid"></div>
+                        <div class="box-body">
+                            <div class="box-ribbon-v"></div>
+                            <div class="box-ribbon-h"></div>
+                            <span class="gift-icon">✉️</span>
+                        </div>
+                    </div>
+                    <span class="gift-label">Gift 3: Heartfelt Letter</span>
+                </div>
+
+                <!-- Gift 4 Box -->
+                <div class="gift-box-wrapper" id="gift-card-4">
+                    <div class="luxury-gift-box" data-gift="4">
+                        <div class="box-lid"></div>
+                        <div class="box-body">
+                            <div class="box-ribbon-v"></div>
+                            <div class="box-ribbon-h"></div>
+                            <span class="gift-icon">🎵</span>
+                        </div>
+                    </div>
+                    <span class="gift-label">Gift 4: Special Song</span>
+                </div>
+            </div>
+
+            <div class="next-stage-wrapper hidden" id="next-stage-wrapper">
+                <button class="btn btn-primary btn-glow" id="go-to-celebration-btn">
+                    <span>Enter Final Celebration ✨</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Page 4 Final Celebration Modal/Overlay Screen -->
+        <section id="final-celebration-section" class="hidden">
+            <div class="celebration-content text-center animated-scale-up">
+                <h1 class="glow-title extra-large">Happy 18th Birthday! 🎉</h1>
+                
+                <div class="duet-monkeys">
+                    <!-- Boy and Girl Monkeys side by side, happily dancing -->
+                    <div class="monkey-wrapper dance-duet">
+                        <svg class="monkey-svg dance-anim-1" viewBox="0 0 100 100">
+                            <!-- Body -->
+                            <rect x="35" y="60" width="30" height="30" rx="15" fill="#8B5A2B" />
+                            <circle cx="50" cy="40" r="22" fill="#8B5A2B" />
+                            <circle cx="28" cy="35" r="8" fill="#8B5A2B" />
+                            <circle cx="28" cy="35" r="5" fill="#FFE4C4" />
+                            <circle cx="72" cy="35" r="8" fill="#8B5A2B" />
+                            <circle cx="72" cy="35" r="5" fill="#FFE4C4" />
+                            <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFE4C4" />
+                            <g class="eyes"><circle class="eye" cx="44" cy="35" r="3" fill="#2d3748"/><circle class="eye" cx="56" cy="35" r="3" fill="#2d3748"/></g>
+                            <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                    <div class="monkey-wrapper dance-duet">
+                        <svg class="monkey-svg dance-anim-2 girl-monkey" viewBox="0 0 100 100">
+                            <!-- Body -->
+                            <rect x="35" y="60" width="30" height="30" rx="15" fill="#C71585" />
+                            <circle cx="50" cy="40" r="22" fill="#C71585" />
+                            <path d="M 28,25 L 35,30 L 35,20 Z" fill="#FF1493" />
+                            <path d="M 28,25 L 21,30 L 21,20 Z" fill="#FF1493" />
+                            <circle cx="28" cy="25" r="3" fill="#FFF0F5" />
+                            <circle cx="28" cy="35" r="8" fill="#C71585" />
+                            <circle cx="28" cy="35" r="5" fill="#FFF0F5" />
+                            <circle cx="72" cy="35" r="8" fill="#C71585" />
+                            <circle cx="72" cy="35" r="5" fill="#FFF0F5" />
+                            <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFF0F5" />
+                            <g class="eyes"><circle class="eye" cx="44" cy="35" r="3" fill="#2d3748"/><circle class="eye" cx="56" cy="35" r="3" fill="#2d3748"/></g>
+                            <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Floating Balloons in Background will be handled by JS dynamic generation -->
+                
+                <div class="glass-card gratitude-card">
+                    <h2>Thank You For Being You! 💖</h2>
+                    <p class="gratitude-text">
+                        "In your smile, there is the glow of a thousand stars. Thank you for making the world a much warmer and happier place. May this 18th year be filled with unbounded joy, magnificent dreams, and all the love you truly deserve!"
+                    </p>
+                    <button class="btn btn-secondary btn-glow" id="replay-btn">Replay Magical Adventure 🔄</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modals for Gifts -->
+    <div class="modal-overlay" id="gift-modal">
+        <div class="modal-card glass-card">
+            <button class="modal-close" id="modal-close-btn">&times;</button>
+            <div id="modal-content-area">
+                <!-- Content injected dynamically via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+              </html>
