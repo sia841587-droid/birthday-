@@ -6,26 +6,23 @@
     <title>The Adventure Begins</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="light-theme">
-    <div class="sky-background">
-        <div class="stars" id="stars"></div>
-        <div class="clouds"></div>
-    </div>
-
-    <div class="glass-card main-card">
-        <div class="monkey-container" id="introMonkey">
-            <img src="monkey.png" alt="Monkey" class="monkey-boy">
-            <div class="speech-bubble" id="introSpeech">Hi!! 👋</div>
+<body class="white-theme">
+    <div class="particles" id="particles"></div>
+    
+    <div class="adventure-container">
+        <div class="monkey-wrapper" id="introMonkey">
+            <img src="monkey.png" alt="Monkey" class="main-monkey">
+            <div class="speech-bubble" id="speech">Hi!! 👋</div>
         </div>
 
-        <h1 class="title">Happy Birthday,3!💙</h1>
-        <h2 class="subtitle">Welcome to Your Biggest Adventure...</h2>
-        <p class="tagline">Today isn't just another birthday... <br> Today is the beginning of your greatest adventure.</p>
-        
-        <button class="btn-premium" onclick="navigateTo('password.html')">Begin The Adventure →</button>
+        <h1 class="luxury-title">Happy Birthday!</h1>
+        <h2 class="luxury-subtitle">Welcome to Your Biggest Adventure...</h2>
+        <p class="luxury-text">Today isn't just another birthday... <br> Today is the beginning of your greatest adventure.</p>
+
+        <button class="btn-glow" onclick="startAdventure()">Begin The Adventure →</button>
     </div>
 
-    <div class="transition-overlay" id="overlay"></div>
+    <div class="door-transition" id="door"></div>
 
     <script src="script.js"></script>
 </body>
