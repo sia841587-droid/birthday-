@@ -1,72 +1,89 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday, 3!</title>
-
-<style>
-body{
-margin:0;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-background:linear-gradient(to bottom,#e8f7ff,#ffffff);
-font-family:Arial,sans-serif;
-overflow:hidden;
-}
-
-.container{
-text-align:center;
-}
-
-h1{
-font-size:45px;
-color:#0080ff;
-margin-bottom:10px;
-}
-
-h2{
-color:#444;
-margin-top:0;
-}
-
-p{
-font-size:20px;
-color:#666;
-}
-
-button{
-margin-top:25px;
-padding:15px 35px;
-font-size:20px;
-background:#2196F3;
-color:white;
-border:none;
-border-radius:30px;
-cursor:pointer;
-}
-
-button:hover{
-background:#0b7dda;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Magical Adventure Begins ✨</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+<body id="index-page">
+    <!-- Starfield Background Canvas -->
+    <canvas id="bg-canvas"></canvas>
 
-<body>
+    <!-- Page Transition Overlay -->
+    <div class="transition-overlay" id="transition-overlay">
+        <div class="door left-door"></div>
+        <div class="door right-door"></div>
+        <div class="portal-core"></div>
+    </div>
 
-<div class="container">
+    <div class="container">
+        <!-- Main Glass Card -->
+        <main class="glass-card main-card animated-fade-in">
+            <header class="header">
+                <h1 class="glow-text">Happy Birthday,3💙!<br><span class="highlight">Welcome to Your Biggest Adventure...</span></h1>
+                <p class="subtitle">Today isn't just another birthday... Today is the beginning of your greatest adventure (18 😱).</p>
+            </header>
 
-<h1>🎉 Happy Birthday, 3! 🎉</h1>
+            <!-- Interactive Monkey Section -->
+            <div class="character-section">
+                <div class="monkey-wrapper" id="index-monkey">
+                    <!-- Cute Inline SVG Monkey (Animatable and self-contained) -->
+                    <svg class="monkey-svg idle" viewBox="0 0 100 100">
+                        <defs>
+                            <radialGradient id="monkey-belly" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#FFE4C4"/>
+                                <stop offset="100%" stop-color="#D2B48C"/>
+                            </radialGradient>
+                        </defs>
+                        <!-- Body -->
+                        <rect x="35" y="60" width="30" height="30" rx="15" fill="#8B5A2B" />
+                        <rect x="40" y="65" width="20" height="20" rx="10" fill="url(#monkey-belly)" />
+                        <!-- Left Arm (Waving) -->
+                        <g class="left-arm">
+                            <rect x="23" y="55" width="12" height="22" rx="6" fill="#8B5A2B" />
+                            <circle cx="29" cy="71" r="5" fill="#FFE4C4" />
+                        </g>
+                        <!-- Right Arm -->
+                        <g class="right-arm">
+                            <rect x="65" y="58" width="12" height="20" rx="6" fill="#8B5A2B" />
+                            <circle cx="71" cy="73" r="5" fill="#FFE4C4" />
+                        </g>
+                        <!-- Head -->
+                        <circle cx="50" cy="40" r="22" fill="#8B5A2B" />
+                        <!-- Ears -->
+                        <circle cx="28" cy="35" r="8" fill="#8B5A2B" />
+                        <circle cx="28" cy="35" r="5" fill="#FFE4C4" />
+                        <circle cx="72" cy="35" r="8" fill="#8B5A2B" />
+                        <circle cx="72" cy="35" r="5" fill="#FFE4C4" />
+                        <!-- Face Inner -->
+                        <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFE4C4" />
+                        <!-- Eyes -->
+                        <g class="eyes">
+                            <circle class="eye left-eye" cx="44" cy="35" r="3" fill="#2d3748" />
+                            <circle class="eye right-eye" cx="56" cy="35" r="3" fill="#2d3748" />
+                        </g>
+                        <!-- Mouth -->
+                        <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
+                    </svg>
+                    <!-- Speech Bubble -->
+                    <div class="speech-bubble">
+                        <p id="speech-text">...</p>
+                    </div>
+                </div>
+            </div>
 
-<h2>💙 Your Adventure Begins 💙</h2>
+            <!-- Glow Action Button -->
+            <button class="btn btn-primary btn-glow" id="begin-btn">
+                <span>Begin The Adventure</span>
+                <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+            </button>
+        </main>
+    </div>
 
-<p>Someone special has created a magical surprise just for you.</p>
-
-<button onclick="location.href='password.html'">Begin Adventure 🚀</button>
-  
-</div>
-
+    <script src="script.js"></script>
 </body>
 </html>
