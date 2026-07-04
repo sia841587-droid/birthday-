@@ -3,26 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Adventure Begins | Happy Birthday</title>
+    <title>The Adventure Begins</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="adventure-page">
-    <canvas id="particleCanvas"></canvas>
-    
-    <div class="glass-container" id="mainCard">
-        <div class="monkey-wrapper">
-            <img src="monkey.png" alt="Monkey" class="monkey-character float-animation" id="mainMonkey">
-            <div class="speech-bubble">Hi!! 👋<br>I've been waiting for you.</div>
-        </div>
-
-        <h1 class="glow-text">Happy Birthday,3💙!</h1>
-        <h2 class="sub-text">Welcome to Your Biggest Adventure...</h2>
-        <p class="description">Today isn't just another birthday... Today is the beginning of your greatest adventure.</p>
-
-        <button class="premium-btn" onclick="startAdventure()">Begin The Adventure →</button>
+<body class="light-theme">
+    <div class="sky-background">
+        <div class="stars" id="stars"></div>
+        <div class="clouds"></div>
     </div>
 
-    <div class="door-transition" id="door"></div>
+    <div class="glass-card main-card">
+        <div class="monkey-container" id="introMonkey">
+            <img src="monkey.png" alt="Monkey" class="monkey-boy">
+            <div class="speech-bubble" id="introSpeech">Hi!! 👋</div>
+        </div>
+
+        <h1 class="title">Happy Birthday,3!💙</h1>
+        <h2 class="subtitle">Welcome to Your Biggest Adventure...</h2>
+        <p class="tagline">Today isn't just another birthday... <br> Today is the beginning of your greatest adventure.</p>
+        
+        <button class="btn-premium" onclick="navigateTo('password.html')">Begin The Adventure →</button>
+    </div>
+
+    <div class="transition-overlay" id="overlay"></div>
 
     <script src="script.js"></script>
 </body>
