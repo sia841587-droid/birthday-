@@ -3,297 +3,576 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday! 🎂✨</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Happy 18th, Three!</title>
+    <style>
+        /* --- GLOBAL AESTHETIC THEME (White & Light Blue) --- */
+        :root {
+            --bg-color: #f0f7fc;
+            --card-color: #ffffff;
+            --accent-blue: #a2d2ff;
+            --text-dark: #2b3a4a;
+            --soft-blue: #e1f1fc;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .scene {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            position: relative;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        button {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(162, 210, 255, 0.4);
+            transition: transform 0.2s, background-color 0.2s;
+            font-weight: bold;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: #8ec3f7;
+        }
+
+        .big-emoji {
+            font-size: 5rem;
+            margin: 20px 0;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* --- SCENE 1: LANDING --- */
+        #scene-landing h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+        #scene-landing h1 span {
+            font-weight: 800;
+            color: #70b3f0;
+        }
+        .tagline {
+            font-size: 1.2rem;
+            color: #7a92a8;
+            margin-bottom: 30px;
+        }
+
+        /* --- MONKEY IMAGE CONTAINER & PARTY HAT --- */
+        .monkey-container {
+            position: relative;
+            display: inline-block;
+            width: 180px;
+            height: 180px;
+            margin-bottom: 25px;
+        }
+
+        #monkey-actor {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .party-hat {
+            position: absolute;
+            top: -35px;
+            left: 48%;
+            transform: translateX(-50%) rotate(-10deg);
+            font-size: 3.5rem;
+            z-index: 10;
+            pointer-events: none;
+            animation: hat-float 3s ease-in-out infinite;
+        }
+
+        @keyframes hat-float {
+            0%, 100% { transform: translateX(-50%) rotate(-10deg) translateY(0); }
+            50% { transform: translateX(-50%) rotate(-5deg) translateY(-5px); }
+        }
+
+        .monkey-typing {
+            animation: wiggle 0.2s ease-in-out infinite;
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(3deg); }
+        }
+
+        .monkey-wrong {
+            animation: scratch-head 0.5s ease-in-out 2;
+        }
+        @keyframes scratch-head {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            20% { transform: translateX(-12px) rotate(-8deg); }
+            40% { transform: translateX(10px) rotate(6deg); }
+            60% { transform: translateX(-8px) rotate(-4deg); }
+            80% { transform: translateX(6px) rotate(3deg); }
+        }
+
+        .monkey-correct {
+            animation: jump-clap 0.4s ease-in-out infinite;
+        }
+        @keyframes jump-clap {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-35px) scale(1.08); }
+        }
+
+        /* --- SCENE 2: PASSWORD KEYPAD --- */
+        .keypad-container {
+            background: var(--card-color);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 320px;
+            width: 100%;
+        }
+        .password-display {
+            background: var(--soft-blue);
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .keypad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+        .key {
+            background: var(--bg-color);
+            border: none;
+            padding: 15px;
+            font-size: 1.3rem;
+            border-radius: 12px;
+            cursor: pointer;
+            color: var(--text-dark);
+            box-shadow: none;
+        }
+        .key:active {
+            background: var(--accent-blue);
+            color: white;
+        }
+        .hint-text {
+            color: #e63946;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        /* --- SCENE 3: DOOR & CAKE --- */
+        .door-container {
+            font-size: 6rem;
+            cursor: pointer;
+            transition: transform 0.5s;
+        }
+        .cake-stage {
+            display: flex;
+            gap: 30px;
+            align-items: flex-end;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .cake {
+            font-size: 5rem;
+            cursor: pointer;
+            position: relative;
+        }
+        .blow-instruction {
+            font-size: 1.1rem;
+            color: #555;
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* --- SCENE 4: SURPRISE CHOICE --- */
+        .choice-box {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* --- SCENE 5: MAIN DASHBOARD --- */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 900px;
+            margin-top: 30px;
+        }
+        .dash-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.04);
+            cursor: pointer;
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+        }
+        .dash-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-blue);
+        }
+        .dash-card .emoji {
+            font-size: 3.5rem;
+        }
+        .watcher-monkey {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 15px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 1.2rem;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* --- POPUP CONTENT MODALS --- */
+        .modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 24px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- FULL PAGE EFFECTS --- */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
 </head>
-<body id="birthday-page">
-    <canvas id="bg-canvas"></canvas>
+<body>
 
-    <!-- Custom Sparkle Canvas Overlay -->
-    <canvas id="sparkle-canvas"></canvas>
+    <audio id="bg-music" src="your-audio-file.mp3" loop></audio>
 
-    <!-- Glowing magical door opening on page load -->
-    <div class="transition-overlay active-out" id="transition-overlay">
-        <div class="door left-door"></div>
-        <div class="door right-door"></div>
-        <div class="portal-core"></div>
+    <div id="global-watcher" class="watcher-monkey hidden">
+        <span id="watcher-avatar">🍿🐒</span> <span id="watcher-bubble">Watching!</span>
     </div>
 
-    <!-- Background Music Toggle Float -->
-    <button class="music-toggle-btn" id="music-toggle">
-        <span class="music-icon">🔇</span>
-        <span class="music-label">Enable Magic Music</span>
-    </button>
-
-    <div class="container scrollable">
-        <!-- Page 3 Main Area -->
-        <section id="birthday-main-section" class="animated-fade-in">
-            <header class="birthday-header text-center">
-                <h1 class="glow-title large-title">Happy Birthday! 🎉</h1>
-                <p class="sparkle-subtitle">Tap the candles to blow them out & make a wish!</p>
-            </header>
-
-            <!-- Birthday Cake & Interactive Character Platform -->
-            <div class="cake-platform">
-                <!-- Boy Monkey (Dances/Interacts) -->
-                <div class="monkey-wrapper birthday-monkey-wrapper" id="birthday-boy-monkey">
-                    <svg class="monkey-svg idle" viewBox="0 0 100 100">
-                        <defs>
-                            <radialGradient id="monkey-belly" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="#FFE4C4"/>
-                                <stop offset="100%" stop-color="#D2B48C"/>
-                            </radialGradient>
-                        </defs>
-                        <rect x="35" y="60" width="30" height="30" rx="15" fill="#8B5A2B" />
-                        <rect x="40" y="65" width="20" height="20" rx="10" fill="url(#monkey-belly)" />
-                        <g class="left-arm">
-                            <rect x="23" y="55" width="12" height="22" rx="6" fill="#8B5A2B" />
-                            <circle cx="29" cy="71" r="5" fill="#FFE4C4" />
-                        </g>
-                        <g class="right-arm">
-                            <rect x="65" y="58" width="12" height="20" rx="6" fill="#8B5A2B" />
-                            <circle cx="71" cy="73" r="5" fill="#FFE4C4" />
-                        </g>
-                        <circle cx="50" cy="40" r="22" fill="#8B5A2B" />
-                        <circle cx="28" cy="35" r="8" fill="#8B5A2B" />
-                        <circle cx="28" cy="35" r="5" fill="#FFE4C4" />
-                        <circle cx="72" cy="35" r="8" fill="#8B5A2B" />
-                        <circle cx="72" cy="35" r="5" fill="#FFE4C4" />
-                        <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFE4C4" />
-                        <g class="eyes">
-                            <circle class="eye left-eye" cx="44" cy="35" r="3" fill="#2d3748" />
-                            <circle class="eye right-eye" cx="56" cy="35" r="3" fill="#2d3748" />
-                        </g>
-                        <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
-                    </svg>
-                    <div class="speech-bubble birthday-speech inline-speech">
-                        <p id="boy-speech">Make a wish! 🎂</p>
-                    </div>
-                </div>
-
-                <!-- 3D Styled Luxury Birthday Cake -->
-                <div class="cake-container" id="birthday-cake">
-                    <div class="cake-glow"></div>
-                    <!-- Plate -->
-                    <div class="cake-plate"></div>
-                    <!-- Base Tier -->
-                    <div class="cake-tier tier-bottom">
-                        <div class="frosting"></div>
-                        <div class="cream-decorations">
-                            <span></span><span></span><span></span><span></span><span></span>
-                        </div>
-                    </div>
-                    <!-- Top Tier -->
-                    <div class="cake-tier tier-top">
-                        <div class="frosting"></div>
-                        <div class="cream-decorations">
-                            <span></span><span></span><span></span><span></span>
-                        </div>
-                    </div>
-                    <!-- Interactive Candles -->
-                    <div class="candles-wrapper">
-                        <div class="candle active" id="candle-1">
-                            <div class="wick"></div>
-                            <div class="flame"></div>
-                            <div class="smoke"></div>
-                        </div>
-                        <div class="candle active" id="candle-2">
-                            <div class="wick"></div>
-                            <div class="flame"></div>
-                            <div class="smoke"></div>
-                        </div>
-                        <div class="candle active" id="candle-3">
-                            <div class="wick"></div>
-                            <div class="flame"></div>
-                            <div class="smoke"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Girl Monkey (Beside Cake) -->
-                <div class="monkey-wrapper birthday-monkey-wrapper" id="birthday-girl-monkey">
-                    <svg class="monkey-svg idle girl-monkey" viewBox="0 0 100 100">
-                        <defs>
-                            <radialGradient id="girl-monkey-belly" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="#FFF0F5"/>
-                                <stop offset="100%" stop-color="#FFB6C1"/>
-                            </radialGradient>
-                        </defs>
-                        <!-- Body -->
-                        <rect x="35" y="60" width="30" height="30" rx="15" fill="#C71585" />
-                        <rect x="40" y="65" width="20" height="20" rx="10" fill="url(#girl-monkey-belly)" />
-                        <!-- Arm Left -->
-                        <g class="left-arm">
-                            <rect x="23" y="55" width="12" height="22" rx="6" fill="#C71585" />
-                            <circle cx="29" cy="71" r="5" fill="#FFF0F5" />
-                        </g>
-                        <!-- Arm Right -->
-                        <g class="right-arm">
-                            <rect x="65" y="58" width="12" height="20" rx="6" fill="#C71585" />
-                            <circle cx="71" cy="73" r="5" fill="#FFF0F5" />
-                        </g>
-                        <!-- Head -->
-                        <circle cx="50" cy="40" r="22" fill="#C71585" />
-                        <!-- Bow Tie on ear -->
-                        <path d="M 28,25 L 35,30 L 35,20 Z" fill="#FF1493" />
-                        <path d="M 28,25 L 21,30 L 21,20 Z" fill="#FF1493" />
-                        <circle cx="28" cy="25" r="3" fill="#FFF0F5" />
-                        <!-- Ears -->
-                        <circle cx="28" cy="35" r="8" fill="#C71585" />
-                        <circle cx="28" cy="35" r="5" fill="#FFF0F5" />
-                        <circle cx="72" cy="35" r="8" fill="#C71585" />
-                        <circle cx="72" cy="35" r="5" fill="#FFF0F5" />
-                        <!-- Face Inner -->
-                        <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFF0F5" />
-                        <!-- Eyes -->
-                        <g class="eyes">
-                            <circle class="eye left-eye" cx="44" cy="35" r="3" fill="#2d3748" />
-                            <circle class="eye right-eye" cx="56" cy="35" r="3" fill="#2d3748" />
-                            <!-- Cute Lashes -->
-                            <line x1="41" y1="32" x2="43" y2="34" stroke="#2d3748" stroke-width="1.5" />
-                            <line x1="59" y1="32" x2="57" y2="34" stroke="#2d3748" stroke-width="1.5" />
-                        </g>
-                        <!-- Mouth -->
-                        <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
-                    </svg>
-                    <div class="speech-bubble birthday-speech inline-speech">
-                        <p id="girl-speech">Yay! Hehe ❤️</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Beautiful Gift Section Header -->
-            <div class="gifts-intro-wrapper hidden" id="gifts-intro">
-                <div class="scroll-arrow">▼</div>
-                <h2 class="sub-glow-text">Your Magical Gifts Are Waiting...</h2>
-                <p class="subtitle">Open each luxury gift box below to reveal your surprises!</p>
-            </div>
-
-            <!-- Premium Grid of Gift Boxes -->
-            <div class="gifts-grid hidden" id="gifts-grid">
-                <!-- Gift 1 Box -->
-                <div class="gift-box-wrapper" id="gift-card-1">
-                    <div class="luxury-gift-box" data-gift="1">
-                        <div class="box-lid"></div>
-                        <div class="box-body">
-                            <div class="box-ribbon-v"></div>
-                            <div class="box-ribbon-h"></div>
-                            <span class="gift-icon">🖼️</span>
-                        </div>
-                    </div>
-                    <span class="gift-label">Gift 1: Photo Gallery</span>
-                </div>
-
-                <!-- Gift 2 Box -->
-                <div class="gift-box-wrapper" id="gift-card-2">
-                    <div class="luxury-gift-box" data-gift="2">
-                        <div class="box-lid"></div>
-                        <div class="box-body">
-                            <div class="box-ribbon-v"></div>
-                            <div class="box-ribbon-h"></div>
-                            <span class="gift-icon">🎥</span>
-                        </div>
-                    </div>
-                    <span class="gift-label">Gift 2: Video Memories</span>
-                </div>
-
-                <!-- Gift 3 Box -->
-                <div class="gift-box-wrapper" id="gift-card-3">
-                    <div class="luxury-gift-box" data-gift="3">
-                        <div class="box-lid"></div>
-                        <div class="box-body">
-                            <div class="box-ribbon-v"></div>
-                            <div class="box-ribbon-h"></div>
-                            <span class="gift-icon">✉️</span>
-                        </div>
-                    </div>
-                    <span class="gift-label">Gift 3: Heartfelt Letter</span>
-                </div>
-
-                <!-- Gift 4 Box -->
-                <div class="gift-box-wrapper" id="gift-card-4">
-                    <div class="luxury-gift-box" data-gift="4">
-                        <div class="box-lid"></div>
-                        <div class="box-body">
-                            <div class="box-ribbon-v"></div>
-                            <div class="box-ribbon-h"></div>
-                            <span class="gift-icon">🎵</span>
-                        </div>
-                    </div>
-                    <span class="gift-label">Gift 4: Special Song</span>
-                </div>
-            </div>
-
-            <div class="next-stage-wrapper hidden" id="next-stage-wrapper">
-                <button class="btn btn-primary btn-glow" id="go-to-celebration-btn">
-                    <span>Enter Final Celebration ✨</span>
-                </button>
-            </div>
-        </section>
-
-        <!-- Page 4 Final Celebration Modal/Overlay Screen -->
-        <section id="final-celebration-section" class="hidden">
-            <div class="celebration-content text-center animated-scale-up">
-                <h1 class="glow-title extra-large">Happy 18th Birthday! 🎉</h1>
-                
-                <div class="duet-monkeys">
-                    <!-- Boy and Girl Monkeys side by side, happily dancing -->
-                    <div class="monkey-wrapper dance-duet">
-                        <svg class="monkey-svg dance-anim-1" viewBox="0 0 100 100">
-                            <!-- Body -->
-                            <rect x="35" y="60" width="30" height="30" rx="15" fill="#8B5A2B" />
-                            <circle cx="50" cy="40" r="22" fill="#8B5A2B" />
-                            <circle cx="28" cy="35" r="8" fill="#8B5A2B" />
-                            <circle cx="28" cy="35" r="5" fill="#FFE4C4" />
-                            <circle cx="72" cy="35" r="8" fill="#8B5A2B" />
-                            <circle cx="72" cy="35" r="5" fill="#FFE4C4" />
-                            <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFE4C4" />
-                            <g class="eyes"><circle class="eye" cx="44" cy="35" r="3" fill="#2d3748"/><circle class="eye" cx="56" cy="35" r="3" fill="#2d3748"/></g>
-                            <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
-                        </svg>
-                    </div>
-                    <div class="monkey-wrapper dance-duet">
-                        <svg class="monkey-svg dance-anim-2 girl-monkey" viewBox="0 0 100 100">
-                            <!-- Body -->
-                            <rect x="35" y="60" width="30" height="30" rx="15" fill="#C71585" />
-                            <circle cx="50" cy="40" r="22" fill="#C71585" />
-                            <path d="M 28,25 L 35,30 L 35,20 Z" fill="#FF1493" />
-                            <path d="M 28,25 L 21,30 L 21,20 Z" fill="#FF1493" />
-                            <circle cx="28" cy="25" r="3" fill="#FFF0F5" />
-                            <circle cx="28" cy="35" r="8" fill="#C71585" />
-                            <circle cx="28" cy="35" r="5" fill="#FFF0F5" />
-                            <circle cx="72" cy="35" r="8" fill="#C71585" />
-                            <circle cx="72" cy="35" r="5" fill="#FFF0F5" />
-                            <path d="M 38,36 A 6,6 0 0,1 50,36 A 6,6 0 0,1 62,36 C 62,44 50,50 50,50 C 50,50 38,44 38,36 Z" fill="#FFF0F5" />
-                            <g class="eyes"><circle class="eye" cx="44" cy="35" r="3" fill="#2d3748"/><circle class="eye" cx="56" cy="35" r="3" fill="#2d3748"/></g>
-                            <path class="mouth smiling" d="M 45,43 Q 50,47 55,43" stroke="#2d3748" stroke-width="2.5" fill="none" stroke-linecap="round" />
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Floating Balloons in Background will be handled by JS dynamic generation -->
-                
-                <div class="glass-card gratitude-card">
-                    <h2>Thank You For Being You! 💖</h2>
-                    <p class="gratitude-text">
-                        "In your smile, there is the glow of a thousand stars. Thank you for making the world a much warmer and happier place. May this 18th year be filled with unbounded joy, magnificent dreams, and all the love you truly deserve!"
-                    </p>
-                    <button class="btn btn-secondary btn-glow" id="replay-btn">Replay Magical Adventure 🔄</button>
-                </div>
-            </div>
-        </section>
+    <!-- ================= SCENE 1: LANDING ================= -->
+    <div id="scene-landing" class="scene">
+        <div class="big-emoji">👑</div>
+        <h1>Happy Birthday, <span>Three</span>!</h1>
+        <p class="tagline">Happy 18th Birthday, Nickname. Your next great chapter awaits.</p>
+        <button onclick="startAdventure()">Let the Adventure Begin</button>
     </div>
 
-    <!-- Modals for Gifts -->
-    <div class="modal-overlay" id="gift-modal">
-        <div class="modal-card glass-card">
-            <button class="modal-close" id="modal-close-btn">&times;</button>
-            <div id="modal-content-area">
-                <!-- Content injected dynamically via JS -->
+    <!-- ================= SCENE 2: PASSWORD KEYPAD ================= -->
+    <div id="scene-auth" class="scene hidden">
+        <div class="monkey-container">
+            <div class="party-hat">🥳</div>
+            <img id="monkey-actor" src="1000041250.jpg" alt="Birthday Monkey Boy">
+        </div>
+        <div class="keypad-container">
+            <div class="password-display" id="pass-display"></div>
+            <div class="keypad-grid">
+                <button class="key" onclick="pressKey('1')">1</button>
+                <button class="key" onclick="pressKey('2')">2</button>
+                <button class="key" onclick="pressKey('3')">3</button>
+                <button class="key" onclick="pressKey('4')">4</button>
+                <button class="key" onclick="pressKey('5')">5</button>
+                <button class="key" onclick="pressKey('6')">6</button>
+                <button class="key" onclick="pressKey('7')">7</button>
+                <button class="key" onclick="pressKey('8')">8</button>
+                <button class="key" onclick="pressKey('9')">9</button>
+                <button class="key" style="background:#ffccd5;" onclick="clearPass()">C</button>
+                <button class="key" onclick="pressKey('0')">0</button>
+                <button class="key" style="background:#b5e2fa;" onclick="submitPass()">✔</button>
+            </div>
+            <div id="hint-box" class="hint-text"></div>
+        </div>
+    </div>
+
+    <!-- ================= SCENE 3: DOOR & CAKE CELEBRATION ================= -->
+    <div id="scene-celebration" class="scene hidden">
+        <div id="door" class="door-container" onclick="openDoor()">🚪</div>
+        <div id="cake-area" class="hidden">
+            <div class="blow-instruction" id="blow-text">Click the Cake to Blow out the Candles! 🎂</div>
+            <div class="cake-stage">
+                <div style="font-size: 4rem;">🐒👑</div>
+                <div id="birthday-cake" class="cake" onclick="blowCandles()">🎂</div>
+                <div style="font-size: 4rem;">💃🦍</div>
+            </div>
+        </div>
+        <button id="btn-to-surprise" class="hidden" style="margin-top: 30px;" onclick="goToSurprisePrompt()">Next ➔</button>
+    </div>
+
+    <!-- ================= SCENE 4: SURPRISE PROMPT ================= -->
+    <div id="scene-prompt" class="scene hidden">
+        <div class="choice-box">
+            <div class="big-emoji">🎁</div>
+            <h2>Do you want a surprise?</h2>
+            <div class="btn-group">
+                <button onclick="revealDashboard()">YES!</button>
+                <button style="background-color: #cbd5e1;" onclick="revealDashboard()">NO</button>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- ================= SCENE 5: THE MAIN SURPRISE DASHBOARD ================= -->
+    <div id="scene-dashboard" class="scene hidden">
+        <h2>Your 18th Birthday Vault 💎</h2>
+        <p>The girl monkey hints: "Click the icons to explore your memories!" ✨</p>
+        
+        <div class="dashboard-grid">
+            <div class="dash-card" onclick="openContent('video')">
+                <div class="emoji">🎥</div>
+                <h3>The Movie</h3>
+                <p>A custom video edit just for you.</p>
+            </div>
+            <div class="dash-card" onclick="openContent('collage')">
+                <div class="emoji">🍼</div>
+                <h3>The Bottle Time Machine</h3>
+                <p>A paraded walk down memory lane.</p>
+            </div>
+            <div class="dash-card" onclick="openContent('letter')">
+                <div class="emoji">✉️</div>
+                <h3>A Letter to Three</h3>
+                <p>From the heart, read when you're ready.</p>
+            </div>
+        </div>
+
+        <button style="margin-top: 50px; background-color: #70b3f0;" onclick="goToMotivational()">Final Surprise ➔</button>
+    </div>
+
+    <!-- ================= SCENE 6: MOTIVATIONAL OUTRO ================= -->
+    <div id="scene-outro" class="scene hidden">
+        <div class="big-emoji">🚀</div>
+        <h2 style="font-weight: 800;">Welcome to 18, King.</h2>
+        <div style="max-width: 600px; text-align: center; line-height: 1.8; font-size: 1.2rem; background: white; padding: 40px; border-radius: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.03);">
+            <p>You are officially an adult now! 18 means bigger dreams, harder work, and building the career you've always wanted. It’s time to hustle, learn, and crush your goals.</p>
+            <p>No matter how busy you get—never lose that inner crazy monkey spirit. I’m always rooting for you. Happy Birthday, Three! 🥂</p>
+        </div>
+    </div>
+
+    <div id="content-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        const CORRECT_PASSWORD = "2008"; 
+        let currentInput = "";
+        let attempts = 0;
+
+        function changeScene(currentId, nextId) {
+            document.getElementById(currentId).classList.add('hidden');
+            document.getElementById(nextId).classList.remove('hidden');
+            window.scrollTo(0,0);
+        }
+
+        function startAdventure() {
+            spawnParticles('🎉', 40);
+            spawnParticles('💥', 20);
+            changeScene('scene-landing', 'scene-auth');
+        }
+
+        function pressKey(num) {
+            if(currentInput.length < 4) {
+                currentInput += num;
+                document.getElementById('pass-display').innerText = '*'.repeat(currentInput.length);
+                const actor = document.getElementById('monkey-actor');
+                actor.classList.add('monkey-typing');
+                setTimeout(() => { actor.classList.remove('monkey-typing'); }, 200);
+            }
+        }
+
+        function clearPass() {
+            currentInput = "";
+            document.getElementById('pass-display').innerText = "";
+        }
+
+        function submitPass() {
+            attempts++;
+            const actor = document.getElementById('monkey-actor');
+            const hintBox = document.getElementById('hint-box');
+            actor.className = "";
+
+            if (currentInput === CORRECT_PASSWORD) {
+                actor.classList.add('monkey-correct');
+                spawnParticles('✨', 50);
+                spawnParticles('❤️', 30);
+                setTimeout(() => {
+                    changeScene('scene-auth', 'scene-celebration');
+                    document.getElementById('bg-music').play().catch(e => console.log("Audio playing"));
+                }, 1500);
+            } else {
+                currentInput = "";
+                document.getElementById('pass-display').innerText = "";
+                actor.classList.add('monkey-wrong');
+                setTimeout(() => { actor.classList.remove('monkey-wrong'); }, 1000);
+
+                if (attempts === 3) {
+                    hintBox.innerText = "Hint: It's the year you were born! 😉";
+                } else if (attempts >= 4) {
+                    hintBox.innerText = "Final Hint: Think 2008!";
+                }
+            }
+        }
+
+        function openDoor() {
+            const door = document.getElementById('door');
+            door.style.transform = "scale(0)";
+            setTimeout(() => {
+                door.classList.add('hidden');
+                document.getElementById('cake-area').classList.remove('hidden');
+                spawnParticles('🌸', 20);
+            }, 500);
+        }
+
+        function blowCandles() {
+            document.getElementById('birthday-cake').innerText = "🎂";
+            document.getElementById('blow-text').innerText = "Candles blown! Make a wish! 🌟";
+            spawnParticles('❤️', 50);
+            spawnParticles('🎈', 30);
+            document.getElementById('btn-to-surprise').classList.remove('hidden');
+        }
+
+        function goToSurprisePrompt() {
+            changeScene('scene-celebration', 'scene-prompt');
+        }
+
+        function revealDashboard() {
+            changeScene('scene-prompt', 'scene-dashboard');
+            document.getElementById('global-watcher').classList.remove('hidden');
+        }
+
+        function openContent(type) {
+            const modal = document.getElementById('content-modal');
+            const body = document.getElementById('modal-body');
+            const bubble = document.getElementById('watcher-bubble');
+
+            modal.classList.remove('hidden');
+
+            if(type === 'video') {
+                bubble.innerText = "Nom nom... eating popcorn 🍿";
+                body.innerHTML = `
+                    <h3>🎥 The Birthday Edit</h3>
+                    <video style="width:100%; max-height:300px; margin-top:15px;" controls>
+                        <source src="your-video.mp4" type="video/mp4">
+                    </video>
+                `;
+            } else if(type === 'collage') {
+                bubble.innerText = "Look at the bottle parade! 🍼";
+                body.innerHTML = `
+                    <h3>🍼 The Bottle Parade Collage</h3>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:15px;">
+                        <img src="pic1.jpg" alt="Memory 1" style="width:100%; border-radius:8px; background:#ddd;">
+                        <img src="pic2.jpg" alt="Memory 2" style="width:100%; border-radius:8px; background:#ddd;">
+                    </div>
+                `;
+            } else if(type === 'letter') {
+                bubble.innerText = "Aww, this is emotional... ✉️";
+                body.innerHTML = `
+                    <h3>✉️ My Birthday Letter to You</h3>
+                    <div style="text-align:left; font-family:serif; line-height:1.6; background:#fcfcfc; padding:20px; border-radius:12px; border-left:4px solid var(--accent-blue); margin-top:15px;">
+                        <p>Dear Three,</p>
+                        <p>Write your beautiful heartfelt letter right here...</p>
+                    </div>
+                `;
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('content-modal').classList.add('hidden');
+            document.getElementById('watcher-bubble').innerText = "Watching!";
+        }
+
+        function goToMotivational() {
+            document.getElementById('global-watcher').classList.add('hidden');
+            changeScene('scene-dashboard', 'scene-outro');
+            spawnParticles('✨', 60);
+        }
+
+        function spawnParticles(emoji, count) {
+            for(let i=0; i<count; i++) {
+                const p = document.createElement('div');
+                p.classList.add('particle');
+                p.innerText = emoji;
+                p.style.left = Math.random() * 100 + 'vw';
+                p.style.top = '-20px';
+                p.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                p.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                p.style.animationDelay = (Math.random() * 0.5) + 's';
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 4000);
+            }
+        }
+    </script>
 </body>
-              </html>
+</html>
